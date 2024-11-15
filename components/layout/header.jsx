@@ -10,17 +10,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { signOut, useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react";
 
 export function Header() {
-  const { status } =useSession()
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const { status } = useSession();
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    status === "authenticated" ? true : false
+  );
   const [activePage, setActivePage] = useState("Home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const toggleAuth = () => signOut()
-  
+  const toggleAuth = () => signOut();
+
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  console.log(status)
+  console.log(status);
   const navItems = [
     {
       name: "Home",
@@ -61,10 +63,8 @@ export function Header() {
               </span>
             </Button>
             <Link href="/" className="flex items-center space-x-2">
-             
               <span className="font-bold text-xl tracking-tight bg-gradient-to-r from-blue-400 to-blue-600 text-transparent bg-clip-text">
-              💪
-              Fitness Club
+                💪 Fitness Club
               </span>
             </Link>
           </div>
@@ -124,20 +124,25 @@ export function Header() {
               </DropdownMenu>
             ) : (
               <div className="hidden md:flex space-x-2">
+              <Link href="/auth/login" passHref>
                 <Button
+                  as="a" // If `Button` supports this, render it as an anchor tag.
                   variant="ghost"
                   className="text-gray-300 hover:text-white hover:bg-gray-800"
-                  onClick={toggleAuth}
                 >
                   Login
                 </Button>
+              </Link>
+              <Link href="/auth/register" passHref>
                 <Button
+                  as="a"
                   className="bg-blue-600 hover:bg-blue-700 text-white"
-                  onClick={toggleAuth}
                 >
                   Get Started
                 </Button>
-              </div>
+              </Link>
+            </div>
+            
             )}
           </div>
         </div>
@@ -166,14 +171,12 @@ export function Header() {
                 <Button
                   variant="ghost"
                   className="text-gray-300 hover:text-white hover:bg-gray-800 justify-start"
-                  onClick={toggleAuth}
                 >
                   <LogIn className="h-5 w-5 mr-2" />
                   Login
                 </Button>
                 <Button
                   className="bg-blue-600 hover:bg-blue-700 text-white justify-start"
-                  onClick={toggleAuth}
                 >
                   Get Started
                 </Button>
