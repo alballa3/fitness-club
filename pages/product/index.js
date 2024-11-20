@@ -27,6 +27,7 @@ import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Navbar } from "@/components/layout/navbar";
 
 // Mock product data (unchanged)
 const products = [
@@ -536,81 +537,7 @@ export default function Product() {
           </Button>
         )}
       </div>
-      <footer className="mt-16 border-t border-gray-800 pt-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
-          <div className="text-center md:text-left">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              💪 Fitness Club
-            </h3>
-            <p className="text-gray-400 mb-4">
-              Your one-stop shop for all your fitness needs. Quality gear,
-              supplements, and tech to support your fitness journey.
-            </p>
-            <div className="flex justify-center md:justify-start space-x-4">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary transition-colors duration-200"
-              >
-                <Instagram className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary transition-colors duration-200"
-              >
-                <Facebook className="h-6 w-6" />
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-primary transition-colors duration-200"
-              >
-                <Twitter className="h-6 w-6" />
-              </a>
-            </div>
-          </div>
-          <div className="text-center md:text-left">
-            <h3 className="text-xl font-semibold mb-4 text-primary">
-              Quick Links
-            </h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-primary transition-colors duration-200"
-                >
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-primary transition-colors duration-200"
-                >
-                  Contact
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-primary transition-colors duration-200"
-                >
-                  FAQs
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="text-gray-400 hover:text-primary transition-colors duration-200"
-                >
-                  Shipping & Returns
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="mt-8 text-center text-gray-400">
-          <p>&copy; 2023 Fitness Club. All rights reserved.</p>
-        </div>
-      </footer>
+     <Navbar></Navbar>
     </div>
   );
 }

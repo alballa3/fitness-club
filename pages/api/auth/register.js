@@ -2,7 +2,7 @@ import { connectToDatabase } from "@/lib/db/mongodb";
 import User from "@/lib/db/user";
 
 export default async function handler(req, res) {
-  const { name, email, password, userdata } = req.body || JSON.parse(req.body);
+  const { name, email, password, userdata } =JSON.parse(req.body)
   await connectToDatabase();
   try {
     // Create a new User instance

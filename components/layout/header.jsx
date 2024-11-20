@@ -13,16 +13,14 @@ import {
 import { signOut, useSession } from "next-auth/react";
 
 export function Header() {
-  const { status } = useSession();
+  const { status,data:session } = useSession();
   const [isAuthenticated, setIsAuthenticated] = useState(
     status === "authenticated" ? true : false
   );
   const [activePage, setActivePage] = useState("Home");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const toggleAuth = () => signOut();
-
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  console.log(status);
   const navItems = [
     {
       name: "Home",

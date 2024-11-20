@@ -46,19 +46,18 @@ export default function login() {
         redirect: false,
         email: formData.email,
         password: formData.password,
+        
       });
+      console.log(data)
       if (!data.ok) {
         setErrors({
           auth: data.error,
         });
         return;
       }
-      route.push("/");
+      // route.push("/");
 
-      console.log("Login attempt with:", { ...formData, rememberMe });
-      // Reset form after submission (in a real app, you'd redirect on successful login)
-      setFormData({ email: "", password: "" });
-      setRememberMe(false);
+      
     } catch (error) {
       if (error instanceof z.ZodError) {
         setErrors(error.flatten().fieldErrors);

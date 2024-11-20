@@ -93,6 +93,7 @@ export default function register() {
     setIsLoading(true);
     try {
       registerSchema.parse(formData);
+      console.log(formData);
       const response = await fetch("/api/auth/register", {
         method: "POST",
         body: JSON.stringify({
@@ -100,7 +101,7 @@ export default function register() {
           email: formData.email,
           password: formData.password,
           userdata: {
-            dateOfBirth: new Date(formData.dateOfBirth),
+            dateOfBirth: formData.dateOfBirth,
             gender: formData.gender,
             height: formData.height,
             weight: formData.weight,

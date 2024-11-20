@@ -5,36 +5,38 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
 export default NextAuth({
-  // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
-      name: "credential",
+      name: "credentials",
       credentials: {
-        email: {
-          type: "email",
-          label: "Email",
-          placeholder: "Enter Your Email",
-        },
-        password: {
-          type: "password",
-          label: "passowrd",
-          placeholder: "Enter Your Password",
-        },
+        email: { type: "email", label: "Email", placeholder: "Enter Your Email" },
+        password: { type: "password", label: "Password", placeholder: "Enter Your Password" },
       },
-
       authorize: async (credential) => {
         const { email, password } = credential;
         await connectToDatabase();
-        const user = await User.findOne({
-          email: email,
-        })
+        const user = await User.findOne({ email });
         if (!user || !compareSync(password, user.password)) {
           throw new Error("The credentials are not valid");
         }
-        return user;
+        return { id: user._id.toString(), email: user.email, role: user.role };
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user.id = token.id;
+      session.user.role = token.role;
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+      }
+      return token;
+    },
+  },
   debug:true,
-  secret:"mfaksfjnkhbh41241"
+  secret: "faksgfasgnf",
 });
